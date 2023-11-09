@@ -61,7 +61,7 @@ public:
             origin = destination;
             destination = Swap;
             pos = 0.0;
-        }
+        } 
         else
         {
             time_on_ground();
@@ -165,6 +165,47 @@ class GeneralAviation :public Plane
 
     }
 };
+class ATC 
+{
+private:
+    vector<Plane*> registered_planes;
+    int MAX_LANDED_PLANE_NUM = 2;
+    int AIRSPACE_DISTANCE = 50;
+    
+    
+public:
+    ATC() {}//empty constructor
+    ~ATC() {}//empty deconstructor 
+
+    void register_plane(Plane* airLiner)
+    {
+        registered_planes.push_back(airLiner);
+    }
+    void control_traffic()
+    {
+       double landed_planes = 0;
+       int i = 0;
+       if (i < registered_planes.size())
+       {
+           landed_planes += registered_planes[i]->get_atSEC();
+           i++; 
+       }
+       else if (landed_planes >= MAX_LANDED_PLANE_NUM)
+       {
+           i = 0;
+           if (i < registered_planes.size())
+           {
+               if (registered_planes[i]->get_atSEC() == 0 && registered_planes[i]->distance_to_SEC() <= AIRSPACE_DISTANCE && registered_planes[i]->get_loitertime() == 0)
+               {
+                   registered_planes[i]->set_loiter_time(100);
+                   i++;
+               }
+
+           }
+       }
+
+    }
+};
 
 int main(int argc,char** argv)
 {//Questsoin one 
@@ -208,6 +249,7 @@ int main(int argc,char** argv)
 
         for (Plane* this_plane : Air)
         {
+
            this_plane-> operate(timestep);
 
            cout<<"from " << this_plane->get_origin() << " to " << this_plane->get_destination() << endl;
