@@ -38,7 +38,7 @@ public:
     {
         if (loiter_time != 0)
         {
-            loiter_time = -dt;
+            loiter_time -= dt;
         }
 
         else if (wait_time != 0)
@@ -58,6 +58,7 @@ public:
 
             string Swap;
             Swap = origin;
+            origin = destination;
             destination = Swap;
             pos = 0.0;
         }
@@ -66,6 +67,7 @@ public:
             time_on_ground();
             string Swap;
             Swap = origin;
+            origin = destination;
             destination = Swap;
             pos = 0.0;
         }
@@ -110,10 +112,10 @@ public:
         loiter_time = loiter;
     }
     
-    double distance_to_SEC(double distance_to_SEC)
+    double distance_to_SEC()
     {
-        if (distance_to_SEC = distance - pos)
-            return distance_to_SEC;
+        if (destination == "SEC")
+            return distance - pos;
 
         else
             return 0.0;
@@ -190,9 +192,30 @@ int main(int argc,char** argv)
 
     double timestep = 36;
 
+   vector<Plane*> Air;
+        Air.push_back(&AmericanAirlines1);
+        Air.push_back(&AmericanAirlines2);
+        Air.push_back(&United1);
+        Air.push_back(&United2);
+        Air.push_back(&GA1);
+        Air.push_back(&GA2);
+        Air.push_back(&GA3);
+
     while (true)
     {
-        operate(timestep);
+        double wait_time = 5;
+        double loiter_time = 10;
+
+        for (Plane* this_plane : Air)
+        {
+           this_plane-> operate(timestep);
+
+           cout<<"from " << this_plane->get_origin() << " to " << this_plane->get_destination() << endl;
+           cout << "Position " << this_plane->get_pos() << " miles" << endl;
+           
+
+        }
+       
     }
 
 
