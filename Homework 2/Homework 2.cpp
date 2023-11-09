@@ -153,8 +153,8 @@ public:
    }
 };
 class GeneralAviation :public Plane
-{
-    GeneralAviation(string Airline, string& from, string& to) :Plane(from, to) {}//constructro 
+{public:
+    GeneralAviation(const string& from,const string& to) :Plane(from, to) {}//constructro 
     ~GeneralAviation() {}//empty deconstructor 
     
     double time_on_ground()//override
@@ -174,11 +174,26 @@ int main(int argc,char** argv)
     mp["SEC"]["EWR"] = 220;
    
     Airliner AmericanAirlines1("AA", "SEC", "PHL");
-    AmericanAirlines1.set_vel(470 / 3600);
+    AmericanAirlines1.set_vel(470.0 / 3600.0);
+    Airliner United1("UA", "SEC", "ORD");
+    United1.set_vel(515.0 / 3600.0);
+    Airliner AmericanAirlines2("AA", "SEC", "ORD");
+    AmericanAirlines2.set_vel(500.0 / 3600.0);
+    Airliner United2("UA", "SEC", "EWR");
+    United2.set_vel(480.0 / 3600.0);
+    GeneralAviation GA1("SEC","PHL");
+    GA1.set_vel(140.0 / 3600.0);
+    GeneralAviation GA2("SEC", "EWR");
+    GA2.set_vel(160.0 / 3600.0);
+    GeneralAviation GA3("SEC", "ORD");
+    GA3.set_vel(180.0 / 3600.0);
 
-    
+    double timestep = 36;
 
-
+    while (true)
+    {
+        operate(timestep);
+    }
 
 
 	return 0;
