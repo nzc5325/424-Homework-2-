@@ -174,12 +174,16 @@ private:
     
     
 public:
-    ATC() {}//empty constructor
-    ~ATC() {}//empty deconstructor 
-
+    ATC() {};//empty constructor
+    ~ATC() {};//empty deconstructor 
+    vector<Plane*>get_registered_planes()
+    {
+        return registered_planes;
+    }
     void register_plane(Plane* airLiner)
     {
         registered_planes.push_back(airLiner);
+        
     }
     void control_traffic()
     {
@@ -232,34 +236,45 @@ int main(int argc,char** argv)
     GA3.set_vel(180.0 / 3600.0);
 
     double timestep = 36;
+    //Questoin 5 testing. 
+    vector<Plane*> Air;
+      Air.push_back(&AmericanAirlines1);
+      Air.push_back(&AmericanAirlines2);
+      Air.push_back(&United1);
+      Air.push_back(&United2);
+      Air.push_back(&GA1);
+      Air.push_back(&GA2);
+      Air.push_back(&GA3);
+    
+    ATC atc;
+    atc.register_plane(&AmericanAirlines1);
+    atc.register_plane(&AmericanAirlines2);
+    atc.register_plane(&United1);
+    atc.register_plane(&United2);
+    atc.register_plane(&GA1);
+    atc.register_plane(&GA2);
+    atc.register_plane(&GA3);
+    
 
-   vector<Plane*> Air;
-        Air.push_back(&AmericanAirlines1);
-        Air.push_back(&AmericanAirlines2);
-        Air.push_back(&United1);
-        Air.push_back(&United2);
-        Air.push_back(&GA1);
-        Air.push_back(&GA2);
-        Air.push_back(&GA3);
-
+   
     while (true)
     {
-        double wait_time = 5;
-        double loiter_time = 10;
+      //  double wait_time = 5;
+      //  double loiter_time = 10;
 
-        for (Plane* this_plane : Air)
+        for (Plane* this_plane : atc.get_registered_planes())
         {
-
            this_plane-> operate(timestep);
+           atc.control_traffic();
 
-           cout<<"from " << this_plane->get_origin() << " to " << this_plane->get_destination() << endl;
+           cout<<"From " << this_plane->get_origin() << " To " << this_plane->get_destination() << endl;
            cout << "Position " << this_plane->get_pos() << " miles" << endl;
-           
+           cout << endl;  
 
         }
        
     }
-
+    
 
 	return 0;
 }
