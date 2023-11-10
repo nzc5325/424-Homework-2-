@@ -11,7 +11,7 @@ protected:
     double wait_time;
 private:
     double pos, vel, distance, loiter_time;
-    bool at_SEC;
+    bool at_SCE;
     string origin, destination;
     map<string, map <string, int>> mp;
 public:
@@ -19,16 +19,16 @@ public:
     {
         origin = from;
         destination = to;
-        mp["SEC"]["PHL"] = 160;
-        mp["SEC"]["ORD"] = 640;
-        mp["SEC"]["EWR"] = 220;
+        mp["SCE"]["PHL"] = 160;
+        mp["SCE"]["ORD"] = 640;
+        mp["SCE"]["EWR"] = 220;
         distance = mp[origin][destination];
 
         pos = 0;
         vel = 0;
         wait_time = 0;
         loiter_time = 0;
-        at_SEC = 0;
+        at_SCE = 0;
 
     }
     virtual ~Plane()
@@ -49,11 +49,11 @@ public:
         else if (pos < distance)
         {
             pos += vel * dt;
-            at_SEC = 0;
+            at_SCE = 0;
         }
-        else if (destination == "SEC")
+        else if (destination == "SCE")
         {
-            at_SEC = 1;
+            at_SCE = 1;
             time_on_ground();
 
             string Swap;
@@ -98,9 +98,9 @@ public:
         return destination;
 
     }
-    bool get_atSEC() const
+    bool get_atSCE() const
     {
-        return at_SEC;
+        return at_SCE;
 
     }
     void set_vel(double velocity)
@@ -112,9 +112,9 @@ public:
         loiter_time = loiter;
     }
     
-    double distance_to_SEC()
+    double distance_to_SCE()
     {
-        if (destination == "SEC")
+        if (destination == "SCE")
             return distance - pos;
 
         else
@@ -191,7 +191,7 @@ public:
        int i = 0;
        if (i < registered_planes.size())
        {
-           landed_planes += registered_planes[i]->get_atSEC();
+           landed_planes += registered_planes[i]->get_atSCE();
            i++; 
        }
        else if (landed_planes >= MAX_LANDED_PLANE_NUM)
@@ -199,7 +199,7 @@ public:
            i = 0;
            if (i < registered_planes.size())
            {
-               if (registered_planes[i]->get_atSEC() == 0 && registered_planes[i]->distance_to_SEC() <= AIRSPACE_DISTANCE && registered_planes[i]->get_loitertime() == 0)
+               if (registered_planes[i]->get_atSCE() == 0 && registered_planes[i]->distance_to_SCE() <= AIRSPACE_DISTANCE && registered_planes[i]->get_loitertime() == 0)
                {
                    registered_planes[i]->set_loiter_time(100);
                    i++;
@@ -216,23 +216,23 @@ int main(int argc,char** argv)
     
     // Distance in miles between airports 
     map<string, map <string, int>> mp;
-    mp["SEC"]["PHL"] = 160;
-    mp["SEC"]["ORD"] = 640;
-    mp["SEC"]["EWR"] = 220;
+    mp["SCE"]["PHL"] = 160;
+    mp["SCE"]["ORD"] = 640;
+    mp["SCE"]["EWR"] = 220;
    
-    Airliner AmericanAirlines1("AA", "SEC", "PHL");
+    Airliner AmericanAirlines1("AA", "SCE", "PHL");
     AmericanAirlines1.set_vel(470.0 / 3600.0);
-    Airliner United1("UA", "SEC", "ORD");
+    Airliner United1("UA", "SCE", "ORD");
     United1.set_vel(515.0 / 3600.0);
-    Airliner AmericanAirlines2("AA", "SEC", "ORD");
+    Airliner AmericanAirlines2("AA", "SCE", "ORD");
     AmericanAirlines2.set_vel(500.0 / 3600.0);
-    Airliner United2("UA", "SEC", "EWR");
+    Airliner United2("UA", "SCE", "EWR");
     United2.set_vel(480.0 / 3600.0);
-    GeneralAviation GA1("SEC","PHL");
+    GeneralAviation GA1("SCE","PHL");
     GA1.set_vel(140.0 / 3600.0);
-    GeneralAviation GA2("SEC", "EWR");
+    GeneralAviation GA2("SCE", "EWR");
     GA2.set_vel(160.0 / 3600.0);
-    GeneralAviation GA3("SEC", "ORD");
+    GeneralAviation GA3("SCE", "ORD");
     GA3.set_vel(180.0 / 3600.0);
 
     double timestep = 36;

@@ -1,15 +1,2 @@
-﻿  Building Custom Rule C:/Users/nicol/source/repos/Homework2/CMakeLists.txt
-  Homework_2.cpp
-  HW2_Visualizer.cpp
-C:\Users\nicol\source\repos\Homework2\HW2_Visualizer.cpp(31,13): warning C4244: 'argument': conversion from 'double' to 'Uint32', possible loss of data
-C:\Users\nicol\source\repos\Homework2\HW2_Visualizer.cpp(48,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\nicol\source\repos\Homework2\HW2_Visualizer.cpp(49,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\nicol\source\repos\Homework2\HW2_Visualizer.cpp(82,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\nicol\source\repos\Homework2\HW2_Visualizer.cpp(83,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\nicol\source\repos\Homework2\HW2_Visualizer.cpp(86,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\nicol\source\repos\Homework2\HW2_Visualizer.cpp(87,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\nicol\source\repos\Homework2\HW2_Visualizer.cpp(90,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\nicol\source\repos\Homework2\HW2_Visualizer.cpp(91,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-SDL2maind.lib(SDL_windows_main.obj) : warning LNK4099: PDB '' was not found with 'SDL2maind.lib(SDL_windows_main.obj)' or at ''; linking object as if no debug info
+﻿  Homework_2.cpp
   Homework2.vcxproj -> C:\Users\nicol\source\repos\Homework2\build\bin\Homework2.exe
